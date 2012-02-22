@@ -1,0 +1,12 @@
+name: CompassWarp
+version: 1.0.0
+description: This Bettercraft plugin permits transportation via compass
+main: net.betterverse.compasswarp.bukkit.BukkitCompassWarp
+author: Julian Trust
+permissions:
+  compasswarp.use:
+      default: false
+      description: Allows teleporting with a PvP cooldown
+  compasswarp.unlimited:
+      default: false
+      description: Allows teleporting without a PvP cooldown
