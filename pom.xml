@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>net.betterverse</groupId>
-  <artifactId>CompassWarp</artifactId>
+  <artifactId>Compass</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>CompassWarp</name>
+  <name>Compass</name>
   <url>http://maven.apache.org</url>
 
   <properties>
