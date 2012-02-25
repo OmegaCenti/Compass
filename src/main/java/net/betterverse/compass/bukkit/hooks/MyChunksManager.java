@@ -37,7 +37,7 @@ public class MyChunksManager {
             return true;
         if(c.isOwner(player.getName()))
             return true;
-        if(c.hasMember(player.getName()))
+        if(c.isPermitted(player.getName()))
             return true;
         return false;
     }
@@ -53,7 +53,7 @@ public class MyChunksManager {
             return true;
         if(c.isOwner(player.getName()))
             return true;
-        if(c.hasMember(player.getName()))
+        if(c.isPermitted(player.getName()))
             return true;
         return false;
     }
