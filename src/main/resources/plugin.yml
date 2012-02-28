@@ -1,7 +1,7 @@
 name: CompassWarp
 version: 1.0.0
 description: This Bettercraft plugin permits transportation via compass
-main: net.betterverse.compasswarp.bukkit.BukkitCompassWarp
+main: net.betterverse.compasswarp.bukkit.BukkitCompass
 author: Julian Trust
 permissions:
   compasswarp.use:
