@@ -3,7 +3,6 @@ package net.betterverse.compass.bukkit.player;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import net.betterverse.compass.api.player.CompassPlayer;
 import net.betterverse.compass.bukkit.BukkitCompass;
 import net.betterverse.compass.bukkit.hooks.MyChunksManager;
 import net.betterverse.compass.bukkit.hooks.TownsManager;
@@ -20,7 +19,7 @@ import org.bukkit.entity.Player;
  * @author Julian Trust
  * @modified 1/8/12
  */
-public final class BukkitCompassPlayer implements CompassPlayer {
+public final class BukkitCompassPlayer {
     
     private final Player player;
     private int cooldown;
@@ -30,22 +29,18 @@ public final class BukkitCompassPlayer implements CompassPlayer {
         this.cooldown = 0;
     }
     
-    @Override
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
     }
     
-    @Override
     public int getCooldown() {
         return cooldown;
     }
     
-    @Override
     public boolean hasPermission(String permission) {
         return player.hasPermission(permission);
     }
     
-    @Override
     public void teleport(int x, int y, int z) {
         Location loc = new Location(
                 player.getWorld(),
@@ -84,7 +79,6 @@ public final class BukkitCompassPlayer implements CompassPlayer {
         player.teleport(loc);
     }
     
-    @Override
     public void warpToTarget() {
         Location loc = getToLocation(player);
         
@@ -93,12 +87,11 @@ public final class BukkitCompassPlayer implements CompassPlayer {
             return;
         }
         
-        CompassPlayer cwPlayer = BukkitCompass.instance.getPlayer(player.getName());
+        BukkitCompassPlayer cwPlayer = BukkitCompass.instance.getPlayer(player.getName());
         
         cwPlayer.teleport(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
     }
     
-    @Override
     public void warpThroughTarget() {
         Location loc = getThroughLocation(player);
         
@@ -107,7 +100,7 @@ public final class BukkitCompassPlayer implements CompassPlayer {
             return;
         }
         
-        CompassPlayer cwPlayer = BukkitCompass.instance.getPlayer(player.getName());
+        BukkitCompassPlayer cwPlayer = BukkitCompass.instance.getPlayer(player.getName());
         
         cwPlayer.teleport(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
     }
@@ -202,7 +195,7 @@ public final class BukkitCompassPlayer implements CompassPlayer {
         int y = bl.getY();
         int z = bl.getZ();
         while(!trans.contains((byte) w.getBlockAt(x, y, z).getTypeId()) &&
-                !trans.contains((byte) w.getBlockAt(x, y + 1, z).getTypeId()))
+                !trans.contains((byte) w.getBlockAt(x, y + 1, z).getTypeId()) && y<w.getMaxHeight())
             y++;
         if(trans.contains((byte) w.getBlockAt(x, y, z).getTypeId()))
             return null;

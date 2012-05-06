@@ -1,10 +1,9 @@
 package net.betterverse.compass.bukkit.listeners;
 
-import net.betterverse.compass.api.Compass;
-import net.betterverse.compass.api.player.CompassPlayer;
 import net.betterverse.compass.bukkit.BukkitCompass;
 import net.betterverse.compass.bukkit.hooks.MyChunksManager;
 import net.betterverse.compass.bukkit.hooks.TownsManager;
+import net.betterverse.compass.bukkit.player.BukkitCompassPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -50,13 +49,13 @@ public final class EventListener implements Listener {
         if(!event.getPlayer().getItemInHand().getType().equals(Material.COMPASS))
             return;
         Action action = event.getAction();
-        CompassPlayer pl = plugin.getPlayer(event.getPlayer().getName());
+        BukkitCompassPlayer pl = plugin.getPlayer(event.getPlayer().getName());
         if(pl == null) {
             plugin.registerPlayer(event.getPlayer());
             pl = plugin.getPlayer(event.getPlayer().getName());
         }
-        boolean unlimited = pl.hasPermission(Compass.warpUnlimitedPermission);
-        boolean use = pl.hasPermission(Compass.warpUsePermission);
+        boolean unlimited = pl.hasPermission(BukkitCompass.warpUnlimitedPermission);
+        boolean use = pl.hasPermission(BukkitCompass.warpUsePermission);
 
         if(!unlimited && !use) return;
 
@@ -81,7 +80,7 @@ public final class EventListener implements Listener {
             EntityDamageByEntityEvent event2 = (EntityDamageByEntityEvent) event;
             if(event2.getDamager() instanceof Player) {
                 Player player = (Player) event2.getDamager();
-                CompassPlayer cwPlayer = plugin.getPlayer(player.getName());
+                BukkitCompassPlayer cwPlayer = plugin.getPlayer(player.getName());
                 if(cwPlayer == null) {
                     plugin.registerPlayer(player);
                     cwPlayer = plugin.getPlayer(player.getName());
