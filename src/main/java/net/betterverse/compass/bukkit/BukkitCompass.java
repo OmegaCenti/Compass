@@ -3,7 +3,6 @@ package net.betterverse.compass.bukkit;
 import java.util.HashMap;
 import java.util.Map;
 import net.betterverse.compass.bukkit.hooks.MyChunksManager;
-import net.betterverse.compass.bukkit.hooks.TownsManager;
 import net.betterverse.compass.bukkit.listeners.EventListener;
 import net.betterverse.compass.bukkit.player.BukkitCompassPlayer;
 import org.bukkit.entity.Player;
@@ -42,8 +41,6 @@ public class BukkitCompass extends JavaPlugin implements Runnable {
         for(Player p : getServer().getOnlinePlayers())
             registerPlayer(p);
         listener = new EventListener(this);
-        if(getServer().getPluginManager().isPluginEnabled("Towny"))
-            TownsManager.setTowns(getServer().getPluginManager().getPlugin("Towny"));
         if(getServer().getPluginManager().isPluginEnabled("MyChunks"))
             MyChunksManager.setMyChunks(getServer().getPluginManager().getPlugin("MyChunks"));
         getServer().getScheduler().scheduleSyncRepeatingTask(this, this, 0, 20);

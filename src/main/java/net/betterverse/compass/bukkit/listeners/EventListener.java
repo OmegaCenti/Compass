@@ -2,7 +2,6 @@ package net.betterverse.compass.bukkit.listeners;
 
 import net.betterverse.compass.bukkit.BukkitCompass;
 import net.betterverse.compass.bukkit.hooks.MyChunksManager;
-import net.betterverse.compass.bukkit.hooks.TownsManager;
 import net.betterverse.compass.bukkit.player.BukkitCompassPlayer;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -98,16 +97,12 @@ public final class EventListener implements Listener {
     
     @EventHandler
     public void onPluginEnable(PluginEnableEvent event) {
-        if(event.getPlugin().getDescription().getName().equalsIgnoreCase("Towny"))
-            TownsManager.setTowns(event.getPlugin());
         if(event.getPlugin().getDescription().getName().equalsIgnoreCase("MyChunks"))
             MyChunksManager.setMyChunks(event.getPlugin());
     }
     
     @EventHandler
     public void onPluginDisable(PluginDisableEvent event) {
-        if(event.getPlugin().getDescription().getName().equalsIgnoreCase("Towny"))
-            TownsManager.setTowns(null);
         if(event.getPlugin().getDescription().getName().equalsIgnoreCase("MyChunks"))
             MyChunksManager.setMyChunks(null);
     }

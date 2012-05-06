@@ -1,11 +1,12 @@
 package net.betterverse.compass.bukkit.hooks;
 
-import net.betterverse.towns.Towns;
-import net.betterverse.towns.object.Resident;
-import net.betterverse.towns.object.Town;
+import net.betterverse.communities.player.CommunityPlayer;
+import net.betterverse.communities.player.PlayerManager;
+import net.betterverse.communities.town.ChunkLocation;
+import net.betterverse.communities.town.Town;
+import net.betterverse.communities.town.TownManager;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 /**
  * Static class for any sort of region checking required
@@ -15,61 +16,24 @@ import org.bukkit.plugin.Plugin;
  * @author Julian Trust
  */
 public class TownsManager {
-    
-    private static Towns plugin;
-    
-    public static void setTowns(Plugin plugin) {
-        if(plugin == null)
-            TownsManager.plugin = null;
-        else
-            TownsManager.plugin = (Towns) plugin;
-    }
-    
+	
     public static boolean canWarpFrom(Player player) {
-        if(plugin == null)
-            return true;
-        Town pTown = null;
-        Town cTown = null;
-        try {
-            Resident r = plugin.getTownsUniverse().getResident(player.getName());
-            if(r.hasTown())
-                try {
-                    pTown = r.getTown();
-                } catch (Exception ex) {
-                    pTown = null;
-                }
-            String cTownName = plugin.getTownsUniverse().getTownName(player.getLocation());
-            if(cTownName != null)
-                cTown = plugin.getTownsUniverse().getTown(cTownName);
-        } catch (Exception ex) {
-            return false;
-        }
-        if(cTown != null && !cTown.equals(pTown))
-            return false;
-        return true;
+				String playerTownName = PlayerManager.getCommunityPlayer(player.getName()).getCurrentTown();
+				Town chunkTown = TownManager.getChunkTown(new ChunkLocation(player.getLocation().getChunk()));
+        String chunkTownName = "";
+				if(chunkTown != null) {
+					chunkTownName = chunkTown.getName();
+				}
+				return playerTownName.equalsIgnoreCase(chunkTownName);
     }
     
     public static boolean canWarpTo(Player player, Location location) {
-        if(plugin == null)
-            return true;
-        Town pTown = null;
-        Town lTown = null;
-        try {
-            Resident r = plugin.getTownsUniverse().getResident(player.getName());
-            if(r.hasTown())
-                try {
-                    pTown = r.getTown();
-                } catch (Exception ex) {
-                    pTown = null;
-                }
-            String lTownName = plugin.getTownsUniverse().getTownName(location);
-            if(lTownName != null)
-                lTown = plugin.getTownsUniverse().getTown(lTownName);
-        } catch (Exception ex) {
-            return false;
-        }
-        if(lTown != null && !lTown.equals(pTown))
-            return false;
-        return true;
+				String playerTownName = PlayerManager.getCommunityPlayer(player.getName()).getCurrentTown();
+				Town chunkTown = TownManager.getChunkTown(new ChunkLocation(location.getChunk()));
+        String chunkTownName = "";
+				if(chunkTown != null) {
+					chunkTownName = chunkTown.getName();
+				}
+				return playerTownName.equalsIgnoreCase(chunkTownName);
     }
 }
