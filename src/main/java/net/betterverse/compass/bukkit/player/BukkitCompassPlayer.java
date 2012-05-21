@@ -187,8 +187,8 @@ public final class BukkitCompassPlayer {
         } catch(Exception ex) {
             return null;
         }
-        if(bl.getLocation().getBlockY() == 0) return null;
         if(bl == null) return null;
+        if(bl.getLocation().getBlockY() == 0) return null;
         if(bl.getLocation().distance(player.getLocation()) > 100) return null;
         World w = bl.getWorld();
         int x = bl.getX();
@@ -205,10 +205,10 @@ public final class BukkitCompassPlayer {
         return new Location(w, x, y + 1, z, player.getLocation().getYaw(), player.getLocation().getPitch());
     }
     
-    private static final HashSet trans;
+    private static final HashSet<Byte> trans;
     static {
         {
-            trans = new HashSet();
+            trans = new HashSet<Byte>();
             trans.add((byte) 0);
             trans.add((byte) 8);
             trans.add((byte) 9);
@@ -218,10 +218,10 @@ public final class BukkitCompassPlayer {
         }
     }
     
-    private static final HashSet unsafe;
+    private static final HashSet<Byte> unsafe;
     static {
         {
-            unsafe = new HashSet();
+            unsafe = new HashSet<Byte>();
             unsafe.add((byte) 10);
             unsafe.add((byte) 11);
         }

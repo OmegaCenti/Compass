@@ -22,11 +22,7 @@ public class TownsManager {
             playerTownName = comPlayer.getCommunity().getName();
         }
         Community chunkTown = coms.getChunkOwner(player.getLocation().getChunk());
-        String chunkTownName = "";
-        if (chunkTown != null) {
-            chunkTownName = chunkTown.getName();
-        }
-        return playerTownName.equalsIgnoreCase(chunkTownName);
+        return chunkTown == null || chunkTown.getName().equals(playerTownName);
     }
 
     public static boolean canWarpTo(Player player, Location location) {
@@ -40,10 +36,6 @@ public class TownsManager {
             playerTownName = comPlayer.getCommunity().getName();
         }
         Community chunkTown = coms.getChunkOwner(location.getChunk());
-        String chunkTownName = "";
-        if (chunkTown != null) {
-            chunkTownName = chunkTown.getName();
-        }
-        return playerTownName.equalsIgnoreCase(chunkTownName);
+        return chunkTown == null || chunkTown.getName().equals(playerTownName);
     }
 }
