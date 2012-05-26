@@ -32,7 +32,7 @@ public class BukkitCompass extends JavaPlugin implements Runnable {
     public static BukkitCompass instance;
     public static Communities communities;
     private Map<String, BukkitCompassPlayer> players;
-    private EventListener listener;
+    private boolean comsEnabled;
 
     @Override
     public void onEnable() {
@@ -42,11 +42,14 @@ public class BukkitCompass extends JavaPlugin implements Runnable {
         players = new HashMap<String, BukkitCompassPlayer>();
         for (Player p : getServer().getOnlinePlayers())
             registerPlayer(p);
-        listener = new EventListener(this);
-        if (getServer().getPluginManager().isPluginEnabled("Communities"))
+        new EventListener(this);
+        if (getServer().getPluginManager().isPluginEnabled("Communities")) {
             communities = (Communities) getServer().getPluginManager().getPlugin("Communities");
-        if (getServer().getPluginManager().isPluginEnabled("MyChunks"))
+            comsEnabled = true;
+        }
+        if (getServer().getPluginManager().isPluginEnabled("MyChunks")) {
             MyChunksManager.setMyChunks(getServer().getPluginManager().getPlugin("MyChunks"));
+        }
         getServer().getScheduler().scheduleSyncRepeatingTask(this, this, 0, 20);
         getServer().getLogger().info("[CompassWarp] - Enabled");
     }
@@ -79,5 +82,9 @@ public class BukkitCompass extends JavaPlugin implements Runnable {
 
     public void unregisterPlayer(Player player) {
         players.remove(player.getName());
+    }
+
+    public boolean isCommunitiesEnabled() {
+        return comsEnabled;
     }
 }

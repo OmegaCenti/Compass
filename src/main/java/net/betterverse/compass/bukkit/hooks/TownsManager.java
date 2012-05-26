@@ -11,11 +11,11 @@ import org.bukkit.entity.Player;
 public class TownsManager {
 
     public static boolean canWarpFrom(Player player) {
-        Communities coms = BukkitCompass.communities;
-        if (coms == null) {
+        if (!BukkitCompass.instance.isCommunitiesEnabled()) {
             return true;
         }
 
+        Communities coms = BukkitCompass.communities;
         CommunityPlayer comPlayer = coms.fromBukkitPlayer(player.getName());
         String playerTownName = "";
         if (comPlayer.getCommunity() != null) {
@@ -26,10 +26,11 @@ public class TownsManager {
     }
 
     public static boolean canWarpTo(Player player, Location location) {
-        Communities coms = BukkitCompass.communities;
-        if (coms == null) {
+        if (!BukkitCompass.instance.isCommunitiesEnabled()) {
             return true;
         }
+
+        Communities coms = BukkitCompass.communities;
         CommunityPlayer comPlayer = coms.fromBukkitPlayer(player.getName());
         String playerTownName = "";
         if (comPlayer.getCommunity() != null) {

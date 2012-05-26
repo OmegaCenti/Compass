@@ -3,6 +3,7 @@ version: 1.0.0
 description: This Bettercraft plugin permits transportation via compass
 main: net.betterverse.compass.bukkit.BukkitCompass
 author: Julian Trust
+soft-depend: [Communities, MyChunks]
 permissions:
   compasswarp.use:
       default: false
