@@ -66,7 +66,7 @@ public final class BukkitCompassPlayer {
         boolean townyWarpTo = TownsManager.canWarpTo(player, loc);
         boolean townyWarpFrom = TownsManager.canWarpFrom(player);
         if(townyWarpFrom == null || townyWarpTo == null) {
-            player.sendMessage("Comms is down! Trying Compass anyways!")
+            player.sendMessage("Comms is down! Trying Compass anyways!");
             player.teleport(loc);
             
         }
