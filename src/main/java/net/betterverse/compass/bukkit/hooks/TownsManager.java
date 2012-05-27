@@ -29,7 +29,9 @@ public class TownsManager {
         if (!BukkitCompass.instance.isCommunitiesEnabled()) {
             return true;
         }
-
+        return true;
+//Testing whether this causes the null pointer exception
+/*
         Communities coms = BukkitCompass.communities;
         CommunityPlayer comPlayer = coms.fromBukkitPlayer(player.getName());
         String playerTownName = "";
@@ -38,5 +40,6 @@ public class TownsManager {
         }
         Community chunkTown = coms.getChunkOwner(location.getChunk());
         return chunkTown == null || chunkTown.getName().equals(playerTownName);
+*/
     }
 }
