@@ -60,6 +60,12 @@ public final class EventListener implements Listener {
 
         if(action.equals(Action.LEFT_CLICK_AIR) || action.equals(Action.LEFT_CLICK_BLOCK))
             pl.warpToTarget();
+//If the player is in water, and he clicks the water, go ahead and teleport to distant... unfortunately water is also a block
+        if(action.equals(Action.LEFT_CLICK_WATER) || action.equals(Action.LEFT_CLICK_BLOCK))
+            pl.warpToTarget();
+        if(action.equals(Action.RIGHT_CLICK_WATER) || action.equals(Action.RIGHT_CLICK_BLOCK))
+            pl.warpThroughTarget();
+//If the player is in water, and he clicks the water, go ahead and teleport through distant target
         else if(action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK))
             pl.warpThroughTarget();
         else
